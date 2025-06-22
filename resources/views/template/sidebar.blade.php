@@ -1,12 +1,12 @@
-  <!--begin::Sidebar-->
-  <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
+<!--begin::Sidebar-->
+<aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
         <!--begin::Sidebar Brand-->
         <div class="sidebar-brand">
           <!--begin::Brand Link-->
           <a href="./index.html" class="brand-link">
             <!--begin::Brand Image-->
             <img
-              src="assets/img/AdminLTELogo.png"
+              src="{{ asset('assets/img/AdminLTELogo.png') }}"
               alt="AdminLTE Logo"
               class="brand-image opacity-75 shadow"
             />
@@ -28,18 +28,18 @@
               role="menu"
               data-accordion="false"
             >
-
-                  <li class="nav-item">
-                    <a href="index.php" class="nav-link active">
-                      <i class="nav-icon bi bi-circle"></i>
-                      <p>Mahasiswa</p>
-                    </a>
-                    <li class="nav-item">
-                    <a href="prodi.php" class="nav-link active">
-                      <i class="nav-icon bi bi-circle"></i>
-                      <p>program studi</p>
-                    </a>
-                  
+              <li class="nav-item">
+                <a href="{{ url('mahasiswa') }}" class="nav-link">
+                  <i class="nav-icon bi bi-palette"></i>
+                  <p>Mahasiswa</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url('prodi')}}" class="nav-link">
+                  <i class="nav-icon bi bi-journals"></i></i>
+                  <p>Program Studi</p>
+                </a>
+              </li>
             </ul>
             <!--end::Sidebar Menu-->
           </nav>
