@@ -22,11 +22,11 @@ class Mahasiswa extends Model
         'Email',
         'password',
         'foto',
-        'Id_prodi'
+        'id'
     ];
 
     public function Prodi(): BelongsTo
     {
-        return $this->belongsTo(Prodi::class, 'Id_prodi');
+        return $this->belongsTo(Prodi::class, 'id');
     }
 }

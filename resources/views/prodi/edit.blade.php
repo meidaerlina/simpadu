@@ -24,8 +24,7 @@
                         <div class="card-header">
                             <h3 class="card-title">Form Edit Prodi</h3>
                         </div>
-
-                        <form action="{{ route('prodi.update', $prodi->Id_prodi) }}" method="POST">
+                        <form action="{{ route('prodi.update', $prodi->id) }}" method="POST">
                             @csrf
                             @method('PUT')
                             <div class="card-body">

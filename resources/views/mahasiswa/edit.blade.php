@@ -35,7 +35,8 @@
                             <h3 class="card-title">Edit Mahasiswa</h3>
                         </div>
                         <!-- /.card-header -->
-                        <form action="{{ route('mahasiswa.update', $mahasiswa->Nim) }}" method="POST" enctype="multipart/form-data" readonly>
+
+                        <form action="{{ route('mahasiswa.update', $mahasiswa->Nim) }}" method="POST" enctype="multipart/form-data" id="mahasiswaForm" readonly>
                             @csrf
                             @method('PUT')
                             <div class="card-body">
@@ -48,7 +49,7 @@
                                     <input type="password" name="password" id="password" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label for="nama" class="form-label">Nama Mahasiswa</label>
+                                    <label for="Nama" class="form-label">Nama Mahasiswa</label>
                                     <input type="text" name="Nama" id="Nama" class="form-control" value="{{ $mahasiswa->Nama }}" required>
                                 </div>
                                 <div class="form-group">
@@ -64,10 +65,10 @@
                                     <input type="email" name="Email" id="Email" class="form-control" value="{{ $mahasiswa->Email }}" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="id_prodi" class="form-label">Prodi</label>
-                                    <select class="form-select" name="Id_prodi" id="Id_prodi" required>
+                                    <label for="id" class="form-label">Prodi</label>
+                                    <select class="form-select" name="id" id="id" >
                                         @foreach ($prodi as $p)
-                                            <option value="{{ $p->Id_prodi }}" {{ $mahasiswa->Id_prodi == $p->Id_prodi ? 'selected' : '' }}>
+                                            <option value="{{ $p->id }}" {{ $mahasiswa->id == $p->id ? 'selected' : '' }}>
                                                 {{ $p->nama }}
                                             </option>
                                         @endforeach

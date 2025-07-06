@@ -37,9 +37,30 @@ class MahasiswaController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->except('_token');
+        // Validasi input
+        $request->validate([
+            'Nim' => 'required|string|unique:mahasiswa,Nim',
+            'Nama' => 'required|string|max:255',
+            'Tanggallahir' => 'required|date',
+            'Telp' => 'required|string|max:20',
+            'Email' => 'required|email|unique:mahasiswa,Email',
+            'password' => 'required|string|min:8',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'id' => 'required|exists:prodi,id'
+        ]);
+
+        $data = $request->except(['_token']);
+        
+        // Hash password
+        $data['password'] = bcrypt($request->password);
+
+        // Handle file upload
+        if ($request->hasFile('foto')) {
+            $data['foto'] = $request->file('foto')->store('mahasiswa', 'public');
+        }
+
         Mahasiswa::create($data);
-        return redirect('/mahasiswa');
+        return redirect()->route('mahasiswa.index')->with('success', 'Data mahasiswa berhasil ditambahkan');
     }
 
     /**
@@ -66,39 +87,39 @@ class MahasiswaController extends Controller
      */
     public function update(Request $request, string $Nim)
     {
-    $request->validate([
-        'Nama' => 'required|string|max:255',
-        'Tanggallahir' => 'required|date',
-        'Telp' => 'required|string|max:20',
-        'Email' => 'required|email|unique:mahasiswa,email,' . $Nim . ',Nim',
-        'password' => 'nullable|string|min:8',
-        'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-        'Id_prodi' => 'required|exists:prodi,Id_prodi'
-    ]);
+        $request->validate([
+            'Nama' => 'required|string|max:255',
+            'Tanggallahir' => 'required|date',
+            'Telp' => 'required|string|max:20',
+            'Email' => 'required|email|unique:mahasiswa,Email,' . $Nim . ',Nim',
+            'password' => 'nullable|string|min:8',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'id' => 'required|exists:prodi,id'
+        ]);
 
-    $mahasiswa = Mahasiswa::findOrFail($Nim);
+        $mahasiswa = Mahasiswa::findOrFail($Nim);
 
-    $data = $request->only(['Nama', 'Tanggallahir', 'Telp', 'Email', 'Id_prodi']);
+        $data = $request->only(['Nama', 'Tanggallahir', 'Telp', 'Email', 'id']);
 
-    // Handle password update
-    if ($request->filled('password')) {
-        $data['password'] = bcrypt($request->password);
-    }
-
-    // Handle file upload
-    if ($request->hasFile('foto')) {
-        // Delete old photo if exists
-        if ($mahasiswa->foto && Storage::disk('public')->exists($mahasiswa->foto)) {
-            Storage::disk('public')->delete($mahasiswa->foto);
+        // Handle password update
+        if ($request->filled('password')) {
+            $data['password'] = bcrypt($request->password);
         }
 
-        $data['foto'] = $request->file('foto')->store('mahasiswa', 'public');
+        // Handle file upload
+        if ($request->hasFile('foto')) {
+            // Delete old photo if exists
+            if ($mahasiswa->foto && Storage::disk('public')->exists($mahasiswa->foto)) {
+                Storage::disk('public')->delete($mahasiswa->foto);
+            }
+
+            $data['foto'] = $request->file('foto')->store('mahasiswa', 'public');
+        }
+
+        $mahasiswa->update($data);
+
+        return redirect()->route('mahasiswa.index')->with('success', 'Data mahasiswa berhasil diupdate');
     }
-
-    $mahasiswa->update($data);
-
-    return redirect()->route('mahasiswa.index')->with('success', 'Data mahasiswa berhasil diupdate');
-}
 
     /**
      * Remove the specified resource from storage.
@@ -106,7 +127,13 @@ class MahasiswaController extends Controller
     public function destroy(string $id)
     {
         $mahasiswa = Mahasiswa::findOrFail($id);
+        
+        // Delete photo if exists
+        if ($mahasiswa->foto && Storage::disk('public')->exists($mahasiswa->foto)) {
+            Storage::disk('public')->delete($mahasiswa->foto);
+        }
+        
         $mahasiswa->delete();
-        return redirect('/mahasiswa')->with('success', 'Data Mahasiswa Berhasil Dihapus');
+        return redirect()->route('mahasiswa.index')->with('success', 'Data Mahasiswa Berhasil Dihapus');
     }
 }

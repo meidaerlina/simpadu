@@ -48,6 +48,7 @@
                                     <th>tanggal_lahir</th>
                                     <th>telp</th>
                                     <th>email</th>
+                                    <th>foto</th>
                                     <th>prodi</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -61,6 +62,13 @@
                                     <td>{{ $m->Tanggallahir }}</td>
                                     <td>{{ $m->Telp }}</td>
                                     <td>{{ $m->Email }}</td>
+                                    <td>
+                                        @if($m->foto)
+                                            <img src="{{ asset('storage/' . $m->foto) }}" alt="Foto {{ $m->Nama }}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;" onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIHZpZXdCb3g9IjAgMCA1MCA1MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjUwIiBoZWlnaHQ9IjUwIiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik0yNSAyM0MyNy4yMDkxIDIzIDI5IDIxLjIwOTEgMjkgMTlDMjkgMTYuNzkwOSAyNy4yMDkxIDE1IDI1IDE1QzIyLjc5MDkgMTUgMjEgMTYuNzkwOSAyMSAxOUMyMSAyMS4yMDkxIDIyLjc5MDkgMjMgMjUgMjNaIiBmaWxsPSIjOUM5Qzk5Ii8+CjxwYXRoIGQ9Ik0zNSAzNUgxNUMxNC40NDc3IDM1IDE0IDM0LjU1MjMgMTQgMzRDMTQgMzAuMTM0IDE3LjEzNCAyNyAyMSAyN0gyOUMzMi44NjYgMjcgMzYgMzAuMTM0IDM2IDM0QzM2IDM0LjU1MjMgMzUuNTUyMyAzNSAzNSAzNVoiIGZpbGw9IiM5QzlDOTkiLz4KPC9zdmc+'; this.title='Foto tidak ditemukan: {{ asset('storage/' . $m->foto) }}';">
+                                        @else
+                                            <span class="text-muted">Tidak ada foto</span>
+                                        @endif
+                                    </td>
                                     <td>{{ $m->Prodi->nama }}</td>
 
                                     <td>

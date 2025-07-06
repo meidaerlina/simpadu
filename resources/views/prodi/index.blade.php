@@ -46,12 +46,12 @@
                                         <td>{{ $p->kaprodi }}</td>
                                         <td>{{ $p->Jurusan }}</td>
                                         <td>
-                                            <form action="{{ route('prodi.destroy', $p->Id_prodi) }}" method="POST" style="display:inline-block">
+                                            <form action="{{ route('prodi.destroy', $p->id) }}" method="POST" style="display:inline-block">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data ini?')">Delete</button>
                                             </form>
-                                            <a class="btn btn-warning" href="{{ route('prodi.edit', $p->Id_prodi) }}">Edit</a>
+                                            <a class="btn btn-warning" href="{{ route('prodi.edit', $p->id) }}">Edit</a>
                                         </td>
                                     </tr>
                                     @endforeach

@@ -26,6 +26,16 @@ class ProdiController extends Controller
             'nama' => 'required|string|max:255',
             'kaprodi' => 'required|string|max:255',
             'Jurusan' => 'required|string|max:255',
+        ], [
+            'nama.required' => 'Nama Prodi wajib diisi!',
+            'nama.string' => 'Nama Prodi harus berupa teks!',
+            'nama.max' => 'Nama Prodi maksimal 255 karakter!',
+            'kaprodi.required' => 'Kaprodi wajib diisi!',
+            'kaprodi.string' => 'Kaprodi harus berupa teks!',
+            'kaprodi.max' => 'Kaprodi maksimal 255 karakter!',
+            'Jurusan.required' => 'Jurusan wajib diisi!',
+            'Jurusan.string' => 'Jurusan harus berupa teks!',
+            'Jurusan.max' => 'Jurusan maksimal 255 karakter!',
         ]);
 
         Prodi::create([
@@ -50,6 +60,16 @@ class ProdiController extends Controller
             'nama' => 'required|string|max:255',
             'kaprodi' => 'required|string|max:255',
             'Jurusan' => 'required|string|max:255',
+        ], [
+            'nama.required' => 'Nama Prodi wajib diisi!',
+            'nama.string' => 'Nama Prodi harus berupa teks!',
+            'nama.max' => 'Nama Prodi maksimal 255 karakter!',
+            'kaprodi.required' => 'Kaprodi wajib diisi!',
+            'kaprodi.string' => 'Kaprodi harus berupa teks!',
+            'kaprodi.max' => 'Kaprodi maksimal 255 karakter!',
+            'Jurusan.required' => 'Jurusan wajib diisi!',
+            'Jurusan.string' => 'Jurusan harus berupa teks!',
+            'Jurusan.max' => 'Jurusan maksimal 255 karakter!',
         ]);
 
         $prodi = Prodi::findOrFail($id);

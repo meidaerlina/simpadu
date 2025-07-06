@@ -41,6 +41,9 @@
       crossorigin="anonymous"
     />
     <!--end::Third Party Plugin(Bootstrap Icons)-->
+    <!--begin::Font Awesome Icons-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!--end::Font Awesome Icons-->
     <!--begin::Required Plugin(AdminLTE)-->
     <link rel="stylesheet" href="{{ asset('css/adminlte.css') }}" />
     <!--end::Required Plugin(AdminLTE)-->
@@ -58,6 +61,8 @@
       integrity="sha256-+uGLJmmTKOqBr+2E6KDYs/NRsHxSkONXFHUL0fy2O/4="
       crossorigin="anonymous"
     />
+    
+    @stack('styles')
   </head>
   <!--end::Head-->
   <!--begin::Body-->
@@ -401,6 +406,8 @@
       sparkline3.render();
     </script>
     <!--end::Script-->
+    
+    @stack('scripts')
   </body>
   <!--end::Body-->
 </html>

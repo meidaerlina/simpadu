@@ -13,7 +13,7 @@ class Prodi extends Model
 
     protected $table = 'prodi';
 
-    protected $primaryKey = 'Id_prodi';
+    protected $primaryKey = 'id';
     public $timestamps = false;
     protected $fillable = [
         'nama',
